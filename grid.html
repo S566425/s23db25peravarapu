@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html> <head> <style>
+.my-header { grid-area: header; }
+.my-menu { grid-area: menu; }
+.my-content { grid-area: main; }
+.my-right-bar { grid-area: right; }
+.my-footer { grid-area: footer; }
+.grid-container {
+display: grid;
+grid-template-areas:
+'header header header header header'
+'menu main main main right'
+'menu main main main right'
+'footer footer footer footer footer';
+grid-gap: 10px;
+background-color: rgba(255, 174, 255, 0.8);
+padding: 10px;
+}
+Grid Example
+.grid-container > div {
+background-color: rgba(255, 255, 255, 0.8);
+text-align: center;
+padding: 20px 0;
+font-size: 30px;
+}
+</style> </head>
+<body>
+<h1>Grid Layout</h1>
+<p>This grid layout has 4 rows and five columns All of the items and the container are div elements and will be placed in the grid according to the template.
+</p>
+Grid Example
+<div class="grid-container">
+<div class="my-header">Header - probably has drop downs</div>
+<div class="my-menu">Menu - Some kinds of choices</div>
+<div class="my-content">This is where my content goes</div>
+<div class="my-right-bar">Another place for a menu or less critical information</div>
+<div class="my-footer">Non critical information in the footer</div>
+</div>
+</body>
+</html>
