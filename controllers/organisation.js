@@ -33,6 +33,18 @@ exports.organisation_list = async function(req, res) {
 //     res.send(`{"error": ${err}}`);
 //     } 
 //    };
+// VIEWS
+// Handle a show all view
+exports.organisation_view_all_Page = async function(req, res) {
+    try{
+    theorganisation = await organisation.find();
+    res.render('organisation', { title: 'organisation Search Results', results: theorganisation });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    } 
+   };
 // List of all Costumes
 // exports.organisation_list = function(req, res) {
 //  res.send('NOT IMPLEMENTED: organisation list');
