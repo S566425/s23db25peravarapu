@@ -3,10 +3,9 @@ extends layout
 block content
     div(class="container-fluid")
     h1= title
-    #- let results=[{course:"Web apps",faculty:"Chandra Mouli",section:6},{course:"Java",faculty:"Ajay Bandi",section:5},{course:"ADB",faculty:"Qin ",section:4}]
-    - let result = results
+    - const result = results
     div(class="row")
-        each form,item in results
+        each form,item in result
             div(class="col-sm-2" onclick=`buy(${item})`) #{form.course}
             div(class="col-sm-2" onclick=`buy(${item})`) #{form.faculty}
             div(class="col-sm-2" onclick=`buy(${item})`) #{form.section}
