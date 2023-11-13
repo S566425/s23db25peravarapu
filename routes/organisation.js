@@ -7,4 +7,7 @@ router.get('/', organisation_controlers.organisation_view_all_Page );
 // GET request for one organisation.
 router.get('/organisations/:id', organisation_controlers.organisation_detail);
 
+/* GET detail organisation page */
+router.get('/detail', organisation_controlers.organisation_view_one_Page);
+
 module.exports = router

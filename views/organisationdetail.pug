@@ -1,0 +1,21 @@
+
+extends layout
+block content
+h1= title
+- let organisationid = toShow._id
+- let organisation_type = toShow.organisation_type
+- let organisationcost = toShow.cost
+- let organisationsize = toShow.size
+div
+div.row
+div(class='organisationAttr mr-3') organisation ID is:
+div #{organisationid}
+div.row
+div(class='organisationAttr mr-3') organisation Type is:
+div #{organisation_type}
+div.row
+div(class='organisationAttr mr-3') organisation Size is:
+div #{organisationsize}
+div.row
+div(class='organisationAttr mr-3') organisation Cost is:
+div #{organisationcost}
