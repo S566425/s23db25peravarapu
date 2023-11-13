@@ -20,9 +20,18 @@ exports.organisation_detail = async function(req, res) {
 // res.send('NOT IMPLEMENTED: organisation create POST');
 // };
 // Handle organisation delete form on DELETE.
-exports.organisation_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: organisation delete DELETE ' + req.params.id);
-};
+// Handle organisation delete on DELETE.
+exports.organisation_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await organisation.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
 // Handle organisation update form on PUT.
 
 
