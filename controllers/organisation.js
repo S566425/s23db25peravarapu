@@ -114,7 +114,7 @@ exports.organisation_view_one_Page = async function(req, res) {
     console.log("single view for id " + req.query.id)
     try{
     result = await organisation.findById( req.query.id)
-    res.render('organisationdetail',
+    res.render('detail',
     { title: 'organisation Detail', toShow: result });
     }
     catch(err){

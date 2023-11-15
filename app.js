@@ -15,7 +15,7 @@ var usersRouter = require('./routes/users');
 var organisationRouter = require('./routes/organisation');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
-var organisation = require("./models/organisation");
+var organisation = require('./models/organisation');
 var resourceRouter = require('./routes/resource');
 
 var app = express();

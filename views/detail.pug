@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1= title
+
+    - let organisationid = toShow._id
+    - let organisationcourse = toShow.course
+    - let organisationfaculty = toShow.faculty
+    - let organisationsection  = toShow.section
+    div
+        div.row
+            div(class='organisationAttr mr-3') organisation ID is:
+            div #{organisationid}
+        div.row
+            div(class='organisationAttr mr-3') Course is:
+            div #{organisationcourse}
+        div.row
+            div(class='organisationAttr mr-3') Faculty is:
+            div #{organisationfaculty}
+        div.row
+            div(class='organisationAttr mr-3') Section is:
+            div #{organisationsection}
