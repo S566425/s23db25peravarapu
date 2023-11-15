@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    h1= title
+    form(id='organisationForm', action="/resource/organisation", method="POST")
+        div.form-group
+            label.organisationAttr(for='organisation_course') organisation course
+            input#organisation_course(course='text', name='organisation_course')
+        div.form-group
+            label.organisationAttr(for='faculty') organisation faculty
+            input#faculty(course='text', name='faculty')
+        div.form-group
+            label.organisationAttr(for='section') organisation section
+            input#section(course='number', name='section')
+        input(course="submit")
+    script.
+        document.forms['organisationForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(event.target.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Save succeded")
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Save failed " + error )
+            });
+        });

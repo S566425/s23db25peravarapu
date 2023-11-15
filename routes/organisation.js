@@ -10,4 +10,7 @@ router.get('/organisations/:id', organisation_controlers.organisation_detail);
 /* GET detail organisation page */
 router.get('/detail', organisation_controlers.organisation_view_one_Page);
 
+/* GET create organisation page */
+router.get('/create', organisation_controlers.organisation_create_Page);
+
 module.exports = router
