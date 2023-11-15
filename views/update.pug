@@ -2,7 +2,7 @@ extends layout
 
 block content
     h1= title
-    form(id='organisationForm', action="/resource/organisation", method="POST")
+    form(id='organisationForm', action="/resource/organisation/:id", method="PUT")
         div.form-group
             label.organisationAttr(for='organisation_course') organisation course
             input#organisation_course(course='text', name='organisation_course')
@@ -18,7 +18,7 @@ block content
             event.preventDefault();
             // TODO do something here to show user that form is being submitted
             fetch(event.target.action, {
-                method: 'POST',
+                method: 'PUT',
                 body: new URLSearchParams(new FormData(event.target)) // event.target is the form
             }).then((resp) => {
                 return resp.json(); // or resp.text() or whatever the server sends
