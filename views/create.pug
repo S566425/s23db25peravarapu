@@ -5,13 +5,13 @@ block content
     form(id='organisationForm', action="/resource/organisation", method="POST")
         div.form-group
             label.organisationAttr(for='organisation_course') organisation course
-            input#organisation_course(course='text', name='organisation_course')
+            input#organisation_course(type='text', name='organisation_course')
         div.form-group
             label.organisationAttr(for='faculty') organisation faculty
-            input#faculty(course='text', name='faculty')
+            input#faculty(type='text', name='faculty')
         div.form-group
             label.organisationAttr(for='section') organisation section
-            input#section(course='number', name='section')
+            input#section(type='number', name='section')
         input(type="submit")
     script.
         document.forms['organisationForm'].addEventListener('submit', (event) => {
