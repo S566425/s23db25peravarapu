@@ -16,4 +16,6 @@ router.get('/create', organisation_controlers.organisation_create_Page);
 /* GET create update page */
 router.get('/update', organisation_controlers.organisation_update_Page);
 
+/* GET delete organisation page */
+router.get('/delete', organisation_controlers.organisation_delete_Page);
 module.exports = router

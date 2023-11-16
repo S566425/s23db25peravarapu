@@ -142,11 +142,25 @@ res.send(`{'error': '${err}'}`);
 exports.organisation_update_Page = async function(req, res) {
     console.log("update view for item "+req.query.id)
     try{
-    let result = await organisation.findById(req.query.id)
-    res.render('update', { title: 'organisation Update', toShow: result });
+        let result = await organisation.findById(req.query.id)
+        res.render('update', { title: 'organisation Update', toShow: result });
     }
     catch(err){
-    res.status(500)
-    res.send(`{'error': '${err}'}`);
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
     }
+    };
+
+    // Handle a delete one view with id from query
+    exports.organisation_delete_Page = async function(req, res) {
+     console.log("Delete view for id " + req.query.id)
+     try{
+     result = await organisation.findById(req.query.id)
+     res.render('organisationdelete', { title: 'organisation Delete', toShow: 
+    result });
+     }
+     catch(err){
+     res.status(500)
+     res.send(`{'error': '${err}'}`);
+     }
     };
