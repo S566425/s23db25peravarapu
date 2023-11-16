@@ -156,7 +156,7 @@ exports.organisation_update_Page = async function(req, res) {
      console.log("Delete view for id " + req.query.id)
      try{
      result = await organisation.findById(req.query.id)
-     res.render('organisationdelete', { title: 'organisation Delete', toShow: 
+     res.render('delete', { title: 'organisation Delete', toShow: 
     result });
      }
      catch(err){
