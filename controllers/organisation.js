@@ -37,28 +37,23 @@ exports.organisation_delete = async function(req, res) {
 
 // Handle organisation update form on PUT.
 exports.organisation_update_put = async function(req, res) {
-console.log(`update on id ${req.params.id} with body
-${JSON.stringify(req.body)}`)
-try {
-let toUpdate = await organisation.findById( req.params.id)
-// Do updates of properties
-if(req.body.organisation_type)
-toUpdate.organisation_type = req.body.organisation_type;
-if(req.body.cost) toUpdate.cost = req.body.cost;
-if(req.body.size) toUpdate.size = req.body.size;
-
-if(req.body.checkboxsale) toUpdate.sale = true;
-else toUpdate.same = false;
-
-let result = await toUpdate.save();
-console.log("Sucess " + result)
-res.send(result)
-} catch (err) {
-res.status(500)
-res.send(`{"error": ${err}: Update for id ${req.params.id}
-failed`);
-}
-};
+    console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await organisation.findById( req.params.id)
+        // Do updates of properties
+        if(req.body.organisationcourse) toUpdate.organisationcourse = req.body.organisationcourse;
+        if(req.body.organisationfaculty) toUpdate.organisationfaculty = req.body.organisationfaculty;
+        if(req.body.organisationsection) toUpdate.organisationsection = req.body.organisationsection;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id}
+        failed`);
+        }
+        };
 
 
  
@@ -95,9 +90,9 @@ exports.organisation_create_post = async function(req, res) {
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
     // {"organisation_type":"goat", "cost":12, "size":"large"}
-    document.course = req.body.course;
-    document.faculty = req.body.faculty;
-    document.section = req.body.section;
+    document.organisationcourse = req.body.organisationcourse;
+    document.organisationfaculty = req.body.organisationfaculty;
+    document.organisationsection = req.body.organisationsection;
     try{
     let result = await document.save();
     res.send(result);
@@ -140,16 +135,16 @@ res.send(`{'error': '${err}'}`);
 // Handle building the view for updating a organisation.
 // query provides the id
 exports.organisation_update_Page = async function(req, res) {
-    console.log("update view for item "+req.query.id)
     try{
-        let result = await organisation.findById(req.query.id)
-        res.render('update', { title: 'organisation Update', toShow: result });
+    let result = await organisation.findById(req.query.id)
+    res.render('update', { title: 'organisation Update', toShow: result });
     }
     catch(err){
-        res.status(500)
-        res.send(`{'error': '${err}'}`);
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
     }
     };
+
 
     // Handle a delete one view with id from query
     exports.organisation_delete_Page = async function(req, res) {

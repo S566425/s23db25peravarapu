@@ -3,12 +3,12 @@ extends layout
 block content
     div(class="container-fluid")
     h1= title
-    - const result = results
+    - let result = results
     div(class="row")
         each form,item in result
-            div(class="col-sm-2" onclick=`buy(${item})`) #{form.course}
-            div(class="col-sm-2" onclick=`buy(${item})`) #{form.faculty}
-            div(class="col-sm-2" onclick=`buy(${item})`) #{form.section}
+            div(class="col-sm-2" onclick=`buy(${item})`) #{form.organisationcourse}
+            div(class="col-sm-2" onclick=`buy(${item})`) #{form.organisationfaculty}
+            div(class="col-sm-2" onclick=`buy(${item})`) #{form.organisationsection}
             
 
     br
@@ -16,9 +16,9 @@ block content
     h4= 'Buy'
 
     div(class="container-fluid")
-      each organisation,index in results
+      each organisation,index in result
         div(class="row", onclick=`buy(${index})`)
-          div(class="col-sm-2") <br>Course #{index}: #{organisation.course} <br>Faculty:#{organisation.faculty} <br> Section:#{organisation.section}
+          div(class="col-sm-2") <br>Course #{index}: #{organisation.organisationcourse} <br>Faculty:#{organisation.organisationfaculty} <br> Section:#{organisation.organisationsection}
 
     script.
         function buy(itemNo)

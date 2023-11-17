@@ -1,42 +1,42 @@
 extends layout
-
 block content
-    h1= title
-
-    - let organisationid = toShow._id
-    - let organisationcourse = toShow.course
-    - let organisationfaculty = toShow.faculty
-    - let organisationsection = toShow.section
-    div.row(class='mb-2')
-        div.mr-1 ID is
-        div #{organisationid}
-    - let actionid = "/resource/organisation/" + organisationid
-    form(id='organisationForm', action=actionid, method="PUT")
-        div.form-group
-            label.organisationAttr(for='course') organisation course
-            input#course(type='text', name='course',value=course)
-        div.form-group
-            label.organisationAttr(for='faculty') organisation faculty
-            input#faculty(type='text', name='faculty',value=faculty)
-        div.form-group
-            label.organisationAttr(for='section') organisation section
-            input#section(type='number', name='section',value=section)
-        input(type="submit")
-    script.
-        document.forms['organisationForm'].addEventListener('submit', (event) => {
-            event.preventDefault();
-            // TODO do something here to show user that form is being submitted
-            fetch(event.target.action, {
-                method: 'PUT',
-                body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-            }).then((resp) => {
-                return resp.json(); // or resp.text() or whatever the server sends
-            }).then((body) => {
-                alert("Update succeeded");
-                // TODO handle body
-            }).catch((error) => {
-                // TODO handle error
-                alert("Update failed " + error );
-            });
-         });
+   h1= title
+   - let organisationid = toShow._id
+   - let organisationcourse = toShow.organisationcourse
+   - let organisationfaculty = toShow.organisationfaculty
+   - let organisationsection= toShow.organisationsection
  
+   div.row(class='mb-2')
+     div.mr-1 ID is
+     div #{organisationid}
+ 
+   - let actionid = "/resource/organisation/" + organisationid
+    form(id='organisationForm', action= actionid, method="PUT")
+     div.form-group
+       label.organisationAttr(for='organisationcourse') organisation course
+       input#organisationcourse(type='text', name='organisationcourse', value= organisationcourse )
+     div.form-group
+       label.organisationAttr(for='organisationfaculty') organisation faculty
+       input#organisationfaculty(type='text', name='organisationfaculty', value= organisationfaculty )
+     div.form-group
+       label.organisationAttr(for='organisationsection') organisation section
+       input#organisationsection(type='number', name='organisationsection', value= organisationsection)
+     input(type="submit")
+ 
+   script.
+     document.forms['organisationForm'].addEventListener('submit', (event) => {
+       event.preventDefault();
+       // TODO do something here to show user that form is being submitted
+       fetch(event.target.action, {
+         method: 'PUT',
+         body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+       }).then((resp) => {
+         return resp.json(); // or resp.text() or whatever the server sends
+       }).then((body) => {
+         alert("Update succeeded");
+         // TODO handle body
+       }).catch((error) => {
+         // TODO handle error
+         alert("Update failed " + error );
+       });
+     });
