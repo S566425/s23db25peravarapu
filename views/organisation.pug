@@ -1,27 +1,44 @@
-extends layout
+//- extends layout
 
-block content
-    div(class="container-fluid")
-    h1= title
-    - let result = results
-    div(class="row")
-        each form,item in result
-            div(class="col-sm-2" onclick=`buy(${item})`) #{form.organisationcourse}
-            div(class="col-sm-2" onclick=`buy(${item})`) #{form.organisationfaculty}
-            div(class="col-sm-2" onclick=`buy(${item})`) #{form.organisationsection}
+//- block content
+//-     div(class="container-fluid")
+//-     h1= title
+//-     - let result = results
+//-     div(class="row")
+//-         each form,item in result
+//-             div(class="col-sm-2" onclick=`buy(${item})`) #{form.course}
+//-             div(class="col-sm-2" onclick=`buy(${item})`) #{form.faculty}
+//-             div(class="col-sm-2" onclick=`buy(${item})`) #{form.section}
             
 
-    br
-    hr
-    h4= 'Buy'
+//-     br
+//-     hr
+//-     h4= 'Buy'
 
-    div(class="container-fluid")
-      each organisation,index in result
-        div(class="row", onclick=`buy(${index})`)
-          div(class="col-sm-2") <br>Course #{index}: #{organisation.organisationcourse} <br>Faculty:#{organisation.organisationfaculty} <br> Section:#{organisation.organisationsection}
+//-     div(class="container-fluid")
+//-       each organisation,index in result
+//-         div(class="row", onclick=`buy(${index})`)
+//-           div(class="col-sm-2") <br>Course #{index}: #{organisation.course} <br>Faculty:#{organisation.faculty} <br> Section:#{organisation.section}
 
-    script.
-        function buy(itemNo)
-        {
-            alert(`You purchased Item ${itemNo+1}`)
-        }
+//-     script.
+//-         function buy(itemNo)
+//-         {
+//-             alert(`You purchased Item ${itemNo+1}`)
+//-         }
+extends layout
+ 
+block content
+  h1= title
+  - let items = results;
+ 
+  div(class="container-fluid")
+    div(class="row m-1")
+      each item in items
+        - let destination = `dispatch("/organisation/update?id=${item._id}")`
+        div(class="row-sm-2 m-1") Item #{item.course}(#{item.faculty}) is #{item.section}
+        button.btn(class="btn-primary ml-1", onclick=destination) Update
+ 
+  script.
+    function dispatch(path) {
+      window.location.href = path;
+    }

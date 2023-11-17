@@ -40,7 +40,7 @@ exports.organisation_update_put = async function(req, res) {
     console.log(`update on id ${req.params.id} with body
     ${JSON.stringify(req.body)}`)
     try {
-        let toUpdate = await organisation.findById( req.params.id)
+        let toUpdate = await organisation.findById(req.params.id)
         // Do updates of properties
         if(req.body.organisationcourse) toUpdate.organisationcourse = req.body.organisationcourse;
         if(req.body.organisationfaculty) toUpdate.organisationfaculty = req.body.organisationfaculty;
@@ -134,28 +134,30 @@ res.send(`{'error': '${err}'}`);
 
 // Handle building the view for updating a organisation.
 // query provides the id
+// Handle building the view for updating a organisation.
+// query provides the id
 exports.organisation_update_Page = async function(req, res) {
-    try{
-    let result = await organisation.findById(req.query.id)
-    res.render('update', { title: 'organisation Update', toShow: result });
-    }
-    catch(err){
-    res.status(500)
-    res.send(`{'error': '${err}'}`);
-    }
-    };
+ console.log("update view for item "+req.query.id)
+ try{
+ let result = await organisation.findById(req.query.id)
+ res.render('organisationupdate', { title: 'organisation Update', toShow: result });
+ }
+ catch(err){
+ res.status(500)
+ res.send(`{'error': '${err}'}`);
+ }
+};
 
-
-    // Handle a delete one view with id from query
-    exports.organisation_delete_Page = async function(req, res) {
-     console.log("Delete view for id " + req.query.id)
-     try{
-     result = await organisation.findById(req.query.id)
-     res.render('delete', { title: 'organisation Delete', toShow: 
-    result });
-     }
-     catch(err){
-     res.status(500)
-     res.send(`{'error': '${err}'}`);
-     }
-    };
+// Handle a delete one view with id from query
+exports.organisation_delete_Page = async function(req, res) {
+ console.log("Delete view for id " + req.query.id)
+ try{
+ result = await organisation.findById(req.query.id)
+ res.render('delete', { title: 'organisation Delete', toShow: 
+result });
+ }
+ catch(err){
+ res.status(500)
+ res.send(`{'error': '${err}'}`);
+ }
+};
