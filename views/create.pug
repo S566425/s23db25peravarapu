@@ -5,13 +5,13 @@ block content
     form(id='organisationForm', action="/resource/organisation", method="POST")
         div.form-group
             label.organisationAttr(for='organisationcourse') organisation course
-            input#organisationcourse(type='text', name='organisationcourse')
+            input#course(type='text', name='organisationcourse')
         div.form-group
             label.organisationAttr(for='organisationfaculty') organisation faculty
-            input#organisationfaculty(type='text', name='organisationfaculty')
+            input#faculty(type='text', name='organisationfaculty')
         div.form-group
             label.organisationAttr(for='organisationsection') organisation section
-            input#organisationsection(type='number', name='organisationsection')
+            input#section(type='number', name='organisationsection')
         input(type="submit")
     script.
         document.forms['organisationForm'].addEventListener('submit', (event) => {
@@ -24,6 +24,7 @@ block content
                 return resp.json(); // or resp.text() or whatever the server sends
             }).then((body) => {
                 alert("Save succeded")
+                window.location='/organisation'
                 // TODO handle body
             }).catch((error) => {
                 // TODO handle error
