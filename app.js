@@ -108,7 +108,7 @@ app.use(function(err, req, res, next) {
 async function recreateDB(){
   // Delete everything
   await organisation.deleteMany();
-  let instance1 = new organisation({course:"Web apps",faculty:"Chandra Mouli",section:6});
+  let instance1 = new organisation({course:"Webapps",faculty:"Chandra Mouli",section:6});
   instance1.save().then(doc=>{
   console.log("First object saved")}
   ).catch(err=>{

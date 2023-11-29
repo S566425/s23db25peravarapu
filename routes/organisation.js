@@ -1,9 +1,6 @@
 var express = require('express');
 var organisation_controlers= require('../controllers/organisation');
 var router = express.Router();
-// A little function to check if we have an authorized user and continue on
-//or
-// redirect to login.
 const secured = (req, res, next) => {
 if (req.user){
 return next();
