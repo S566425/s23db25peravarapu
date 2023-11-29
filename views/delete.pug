@@ -5,9 +5,9 @@ block content
     h2 No instance to delete
   else
     - let organisationid = toShow._id
-    - let organisationcourse = toShow.course
-    - let organisationfaculty = toShow.faculty
-    - let organisationsection = toShow.section
+    - let course = toShow.course
+    - let faculty = toShow.faculty
+    - let section = toShow.section
     - let actionid = "/resource/organisation/" + organisationid
  
     script.
@@ -19,13 +19,13 @@ block content
           div #{organisationid}
       div.row
         div(class='organisationAttr mr-3') organisation course is:
-          div #{organisationcourse}
+          div #{course}
       div.row
         div(class='organisationAttr mr-3') organisation faculty is:
-          div #{organisationfaculty}
+          div #{faculty}
       div.row
         div(class='organisationAttr mr-3') organisation section is:
-          div #{organisationsection}
+          div #{section}
       button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
       button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
  

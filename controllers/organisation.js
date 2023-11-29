@@ -1,8 +1,8 @@
 var organisation = require('../models/organisation');
 // List of all organisations
-// exports.organisation_list = function(req, res) {
-// res.send('NOT IMPLEMENTED: organisation list');
-// };
+ exports.organisation_list = function(req, res) {
+ res.send('NOT IMPLEMENTED: organisation list');
+ };
 // for a specific organisation.
 // for a specific organisation.
 exports.organisation_detail = async function(req, res) {
@@ -42,9 +42,9 @@ exports.organisation_update_put = async function(req, res) {
     try {
         let toUpdate = await organisation.findById(req.params.id)
         // Do updates of properties
-        if(req.body.organisationcourse) toUpdate.organisationcourse = req.body.organisationcourse;
-        if(req.body.organisationfaculty) toUpdate.organisationfaculty = req.body.organisationfaculty;
-        if(req.body.organisationsection) toUpdate.organisationsection = req.body.organisationsection;
+        if(req.body.course) toUpdate.course = req.body.course;
+        if(req.body.faculty) toUpdate.faculty = req.body.faculty;
+        if(req.body.section) toUpdate.section = req.body.section;
         let result = await toUpdate.save();
         console.log("Sucess " + result)
         res.send(result)
@@ -90,9 +90,9 @@ exports.organisation_create_post = async function(req, res) {
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
     // {"organisation_type":"goat", "cost":12, "size":"large"}
-    document.organisationcourse = req.body.organisationcourse;
-    document.organisationfaculty = req.body.organisationfaculty;
-    document.organisationsection = req.body.organisationsection;
+    document.course = req.body.course;
+    document.faculty = req.body.faculty;
+    document.section = req.body.section;
     try{
     let result = await document.save();
     res.send(result);

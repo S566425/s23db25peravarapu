@@ -4,14 +4,14 @@ block content
     h1= title
     form(id='organisationForm', action="/resource/organisation", method="POST")
         div.form-group
-            label.organisationAttr(for='organisationcourse') organisation course
-            input#course(type='text', name='organisationcourse')
+            label.organisationAttr(for='course') organisation course
+            input#course(type='text', name='course')
         div.form-group
-            label.organisationAttr(for='organisationfaculty') organisation faculty
-            input#faculty(type='text', name='organisationfaculty')
+            label.organisationAttr(for='faculty') organisation faculty
+            input#faculty(type='text', name='faculty')
         div.form-group
-            label.organisationAttr(for='organisationsection') organisation section
-            input#section(type='number', name='organisationsection')
+            label.organisationAttr(for='section') organisation section
+            input#section(type='number', name='section')
         input(type="submit")
     script.
         document.forms['organisationForm'].addEventListener('submit', (event) => {

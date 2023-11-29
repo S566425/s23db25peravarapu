@@ -2,21 +2,23 @@ extends layout
 
 block content
     h1= title
-
-    - let organisationid = toShow._id
-    - let organisationcourse = toShow.organisationcourse
-    - let organisationfaculty = toShow.organisationfaculty
-    - let organisationsection  = toShow.organisationsection
-    div
-        div.row
-            div(class='organisationAttr mr-3') organisation ID is:
-            div #{organisationid}
-        div.row
-            div(class='organisationAttr mr-3') Course is:
-            div #{organisationcourse}
-        div.row
-            div(class='organisationAttr mr-3') Faculty is:
-            div #{organisationfaculty}
-        div.row
-            div(class='organisationAttr mr-3') Section is:
-            div #{organisationsection}
+    if(toShow==null)
+        h2 No instance of this detail 
+    else
+        - let organisationid = toShow._id
+        - let course = toShow.course
+        - let faculty = toShow.faculty
+        - let section  = toShow.section
+        div
+            div.row
+                div(class='organisationAttr mr-3') organisation ID is:
+                    div #{organisationid}
+            div.row
+                div(class='organisationAttr mr-3') Course is:
+                    div #{course}
+            div.row
+                div(class='organisationAttr mr-3') Faculty is:
+                    div #{faculty}
+            div.row
+                div(class='organisationAttr mr-3') Section is:
+                    div #{section}

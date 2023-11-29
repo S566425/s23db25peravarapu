@@ -4,23 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-
-require('dotenv').config();
-const connectionString = process.env.MONGO_CON
-mongoose = require('mongoose');
-// mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect(connectionString);
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var organisationRouter = require('./routes/organisation');
-var boardRouter = require('./routes/board');
-var chooseRouter = require('./routes/choose');
-var organisation = require('./models/organisation');
-var resourceRouter = require('./routes/resource');
-
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var Account =require('./models/account');
 passport.use(new LocalStrategy(
   function(username, password, done) {
   Account.findOne({ username: username })
@@ -36,15 +22,23 @@ passport.use(new LocalStrategy(
   })
   .catch(function(err){
   return done(err)
-  })
+  });
   })
   )
+
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var organisationRouter = require('./routes/organisation');
+var boardRouter = require('./routes/board');
+var chooseRouter = require('./routes/choose');
+var organisation = require('./models/organisation');
+var resourceRouter = require('./routes/resource');
+
   
   
 var app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -52,12 +46,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/organisation',organisationRouter);
-app.use('/board',boardRouter);
-app.use('/choose',chooseRouter);
-app.use('/resource',resourceRouter);
+
 //app.use();
 app.use(require('express-session')({
   secret: 'keyboard cat',
@@ -69,10 +58,33 @@ app.use(require('express-session')({
 // passport config
 // Use the existing connection
 // The Account model
-var Account =require('./models/account');
+
+require('dotenv').config();
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+// mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(connectionString);
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
+
+var db = mongoose.connection;
+
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/organisation',organisationRouter);
+app.use('/board',boardRouter);
+app.use('/choose',chooseRouter);
+app.use('/resource',resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -81,6 +93,16 @@ app.use(function(req, res, next) {
 );
 
 // view engine setup
+
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 
 async function recreateDB(){
@@ -112,34 +134,18 @@ async function recreateDB(){
     recreateDB();}
 
 // List of all Costumes
-exports.organisation_list = async function(req, res) {
-  try{
-    console.log(`Triggered`);
-  theorganisation = await organisation.find();
-  res.send(theorganisation);
-  }
-  catch(err){
-  res.status(500);
-  res.send(`{"error": ${err}}`);
-  }
-  };
+// exports.organisation_list = async function(req, res) {
+//   try{
+//     console.log(`Triggered`);
+//   theorganisation = await organisation.find();
+//   res.send(theorganisation);
+//   }
+//   catch(err){
+//   res.status(500);
+//   res.send(`{"error": ${err}}`);
+//   }
+//   };
 
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once("open", function(){
-console.log("Connection to DB succeeded")});
 
 
 module.exports = app;
